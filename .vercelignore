@@ -1,0 +1,51 @@
+# Vercel Ignore File
+# Files and directories to exclude from deployment
+
+# Local environment files
+.env.local
+.env*.local
+
+# Development files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+.nyc_output/
+
+# Local database
+*.db
+*.db-journal
+
+# XAMPP/MySQL dumps
+*.sql
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build artifacts (will be regenerated)
+.next/cache/
+
+# Documentation
+about-site/
+PANDUAN-*.md
+DEPLOYMENT-*.md
+SETUP-*.md
+EXPORT-*.md
+readme.txt
+cookies.txt

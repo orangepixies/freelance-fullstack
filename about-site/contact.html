@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Freelance Full-Stack</title>
+<link rel="stylesheet" href="theme.css">
+</head><body>
+<header><div class="container nav">
+  <div class="brand">vodjo<span>.</span></div>
+  <nav class="menu">
+    <a href="https://main-domainmu.com" class="link-underline">Home</a>
+    <a href="about.html" class="link-underline">About</a>
+    <a href="services.html" class="link-underline">Services</a>
+    <a href="works.html" class="link-underline">Works</a>
+    <a href="tech.html" class="link-underline">Tech</a>
+    <a href="process.html" class="link-underline">Process</a>
+  </nav>
+</div></header>
+
+<main>
+  <section class="hero container">
+    <h1 class="h-title">Let’s work together</h1>
+    <p class="h-sub">Tell me about your idea. I’ll get back within 24 hours.</p>
+  </section>
+
+  <section class="container grid grid-2">
+    <div class="card">
+      <h3>Contact info</h3>
+      <p>Email: <a class="link-underline" href="mailto:hello@freelancer.dev">hello@freelancer.dev</a></p>
+      <p>WhatsApp: <a class="link-underline" href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
+      <p style="margin-top:8px"><span class="badge">1 slot open this month</span></p>
+    </div>
+
+    <div class="card">
+      <!-- Kirim ke API Next.js kamu (aktifkan CORS bila beda domain) -->
+      <form id="contact" onsubmit="submitForm(event)">
+        <input name="name" placeholder="Your name" required>
+        <div style="height:10px"></div>
+        <input name="email" type="email" placeholder="Email" required>
+        <div style="height:10px"></div>
+        <textarea name="message" placeholder="Tell me about your project" required></textarea>
+        <div style="height:12px"></div>
+        <button class="btn" type="submit">Send Message</button>
+        <div id="msg" style="color:var(--muted);margin-top:10px;font-size:14px"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container foot"><div>Freelance Full-Stack</div><div class="social">GH</div></div></footer>
+
+<script>
+async function submitForm(e){
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    message: form.message.value
+  };
+
+  // GANTI ke domain Next.js utama
+  const endpoint = 'https://main-domainmu.com/api/contact';
+
+  const res = await fetch(endpoint, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  }).catch(()=>null);
+
+  const box = document.getElementById('msg');
+  if(res && res.ok){
+    const json = await res.json();
+    box.textContent = json.ok ? 'Thanks! Message sent.' : ('Error: '+(json.error||'unknown'));
+    if(json.ok) form.reset();
+  }else{
+    box.textContent = 'Failed to submit. Please try again later.';
+  }
+}
+</script>
+</body></html>
