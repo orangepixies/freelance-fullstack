@@ -60,4 +60,6 @@ generate-hash.js
 reset-admin.mjs
 update_password.sql
 
+# Ignore all markdown files except content/posts
 *.md
+!content/**/*.md
